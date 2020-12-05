@@ -1,7 +1,7 @@
 rs.initiate({
 	"_id":"sh1",
 	"members":[
-		{"_id":0, "host":"127.0.0.1:27017", "priority":3},
+		{"_id":0, "host":"127.0.0.1:27016", "priority":3},
 		{"_id":1, "host":"127.0.0.1:27018", "priority":1},
 		{"_id":2, "host":"127.0.0.1:27019", "arbiterOnly":true},
 		]
@@ -34,13 +34,14 @@ db.runCommand({"addShard":"sh2/127.0.0.1:27117,127.0.0.1:27118,127.0.0.1:27119"}
 
 # 开启tysn数据库分片功能
 sh.enablesharding("tysn")
-或
-db.runCommand({"enablesharding":"tysn"})
 # 开启tysn数据库下era5集合的分片功能
-sh.shardcollection("tysn.era5", {"loc":"hashed"})
+sh.shardCollection("tysa.era5", {"_id":"hashed"})
 或
-db.runCommand({"shardcollection":"tysn.era5", "key":{"loc":"hashed"}})
+db.runCommand({"enablesharding":"tysa"})
+db.runCommand({"shardcollection":"tysa.era5", "key":{"loc":"hashed"}})
 
 
 # 分片信息查询
 sh.status()
+
+# 500hPa位势高度场，1981-2019月平均，json13.38gb大小，插入后4.6gb大小
